@@ -69,7 +69,7 @@ class Player:
             # Iterate through every player and add it to the table
             for lines in reader:
                 ids = lines.split(",")[0]
-                names = lines.split(",", )[1].strip("\n")
+                names = lines.split(",")[1].strip("\n")
                 table.add_row([ids, names])
         file.close()
         return table
