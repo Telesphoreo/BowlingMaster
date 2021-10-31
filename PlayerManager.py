@@ -25,18 +25,16 @@ class Player:
             writer.writerow(name)
         file.close()
 
-    # why do you need pandas for this
+    # now to move it back to its own csv file
     def deletePlayer(self, id):
-        with open(filename, "r") as file:
-            ihatepython = pd.read_csv(file, header=None)
-            print(ihatepython)
-            ihatepython.drop(index=id, inplace=True)
-            print()
-            print(ihatepython)
-            # this now works, but the problem now is there is a difference between the index and the ids
-            # instead of dropping from the index, we'll have to figure out how to drop
-            # the actual row itself
-            ihatepython.to_csv(filename, header=None, index=False)
+        input = open(filename, "r")
+        output = open(filename + "_edited", "w")
+        writer = csv.writer(output)
+        for row in csv.reader(input):
+            if row[0] != str(id):
+                writer.writerow(row)
+        input.close()
+        output.close()
 
     # Method for generating an ID for each player
     def generateId(self):
@@ -91,9 +89,8 @@ class Player:
                     return lines.split(",")[0]
         file.close()
 
-'''
+
 def main():
     Player().deletePlayer(int(6))
 
 main()
-'''
