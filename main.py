@@ -29,7 +29,7 @@ def displayMangePlayersMenu():
     print("3 - List Players")
     print("4 - Back to Main Menu")
     print("5 - Exit")
-
+    #Sammy wildn
     while True:
         menu_option = input("Please enter a command: ")
         pm = Player()
