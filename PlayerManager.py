@@ -27,12 +27,10 @@ class Player:
 
     # why do you need pandas for this
     def deletePlayer(self, id):
-        id = int(id) - 1
-        print(str(id))
         with open(filename, "r") as file:
             ihatepython = pd.read_csv(file, header=None)
             print(ihatepython)
-            ihatepython.drop([int(id)], axis="rows", inplace=True)
+            ihatepython.drop(index=id, inplace=True)
             print()
             print(ihatepython)
             # this now works, but the problem now is there is a difference between the index and the ids
@@ -93,3 +91,9 @@ class Player:
                     return lines.split(",")[0]
         file.close()
 
+'''
+def main():
+    Player().deletePlayer(int(6))
+
+main()
+'''

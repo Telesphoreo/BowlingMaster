@@ -29,7 +29,7 @@ def displayMangePlayersMenu():
     print("3 - List Players")
     print("4 - Back to Main Menu")
     print("5 - Exit")
-    #Sammy wildn
+
     while True:
         menu_option = input("Please enter a command: ")
         pm = Player()
@@ -55,12 +55,14 @@ def main():
     print("1 - Manage Teams")
     print("2 - Manage Players")
     print("3 - Exit")
+    menu_option = input("Please enter a command: ")
     while True:
-        menu_option = input("Please enter a command: ")
         if menu_option == "1":
             displayManageTeamsWindow()
+            break
         elif menu_option == "2":
             displayMangePlayersMenu()
+            break
         elif menu_option == "3":
             print("Exiting program")
             break
