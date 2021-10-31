@@ -38,7 +38,8 @@ def displayMangePlayersMenu():
             print(pm.listPlayers())
         elif menu_option == "4":
             main()
-
+        else:
+            print("You did not enter a valid command")
 
 
 def main():

@@ -1,6 +1,7 @@
 import csv
 from prettytable import PrettyTable
 from os.path import exists
+import pandas as pd
 
 filename = "players.csv"
 
@@ -16,7 +17,10 @@ class Player:
         with open(filename, "a") as file:
             writer = csv.writer(file)
             writer.writerow(name)
-            file.close()
+        file.close()
+
+    def deletePlayer(self, id):
+        ihatepython = pd.read_csv(filename)
 
     # Method for generating an ID for each player
     def generateId(self):
@@ -33,6 +37,7 @@ class Player:
                 previousID = last_line.split(",")[0]
                 # (Hopefully) convert it to an integer and add 1
                 newID = int(previousID) + 1
+                file.close()
                 return newID
             # If this is the first player, return 1
             except IndexError:
@@ -51,8 +56,9 @@ class Player:
             # Iterate through every player and add it to the table
             for lines in reader:
                 ids = lines.split(",")[0]
-                names = lines.split(",",)[1].strip("\n")
+                names = lines.split(",", )[1].strip("\n")
                 table.add_row([ids, names])
+        file.close()
         return table
 
     # Get a player's name from their ID
@@ -64,14 +70,21 @@ class Player:
                 if lines.split(",")[0] == id:
                     # Return the name
                     return lines.split(",")[1]
+        file.close()
 
-    # Broken for now
     def getID(self, name):
         with open(filename, "r") as file:
             reader = file.readlines()
             print(name)
             for lines in reader:
                 print(lines.split(",")[1])
-                if lines.split(",")[1] == name:
+                if name == lines.split(",")[1]:
                     print(lines.split(",")[0])
                     return lines.split(",")[0]
+        file.close()
+
+def main():
+    Player().deletePlayer("1")
+
+if __name__ == '__main__':
+    main()
