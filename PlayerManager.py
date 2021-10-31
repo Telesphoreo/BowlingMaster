@@ -88,20 +88,8 @@ class Player:
     def getID(self, name):
         with open(filename, "r") as file:
             reader = file.readlines()
-            print(name)
             for lines in reader:
-                print(lines.split(",")[1])
-                if name == lines.split(",")[1]:
-                    print(lines.split(",")[0])
+                if name == lines.split(",")[1].strip("\n"):
                     return lines.split(",")[0]
         file.close()
 
-
-'''
-def main():
-    Player().deletePlayer("1")
-
-
-if __name__ == '__main__':
-    main()
-'''

@@ -20,7 +20,7 @@ def displayManageTeamsWindow():
         elif menu_option == "4":
             main()
         else:
-            print("You did not enter a valid command")
+            print("You did not enter a valid command (teams)")
 
 
 def displayMangePlayersMenu():
@@ -28,6 +28,7 @@ def displayMangePlayersMenu():
     print("2 - Remove Player")
     print("3 - List Players")
     print("4 - Back to Main Menu")
+    print("5 - Exit")
 
     while True:
         menu_option = input("Please enter a command: ")
@@ -43,25 +44,28 @@ def displayMangePlayersMenu():
             print(pm.listPlayers())
         elif menu_option == "4":
             main()
+            break
         else:
-            print("You did not enter a valid command")
+            print("You did not enter a valid command (player)")
+        break
 
 
 def main():
     print("Bowling Manager")
     print("1 - Manage Teams")
     print("2 - Manage Players")
-    menu_option = input("Please enter a command: ")
+    print("3 - Exit")
     while True:
+        menu_option = input("Please enter a command: ")
         if menu_option == "1":
             displayManageTeamsWindow()
-            break
         elif menu_option == "2":
             displayMangePlayersMenu()
+        elif menu_option == "3":
+            print("Exiting program")
             break
         else:
             print("You did not enter a valid command.")
-            break
 
 
 if __name__ == "__main__":
