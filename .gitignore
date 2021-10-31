@@ -4,6 +4,7 @@ __pycache__/
 *$py.class
 
 .idea/
+players.csv
 
 # C extensions
 *.so
