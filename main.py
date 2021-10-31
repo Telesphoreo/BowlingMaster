@@ -5,6 +5,7 @@ def displayManageTeamsWindow():
     print("1 - Add Team")
     print("2 - Remove Team")
     print("3 - List Teams")
+    print("4 - Back to Main Menu")
     while True:
         menu_option = input("Please enter a command: ")
         if menu_option == "1":
@@ -16,6 +17,10 @@ def displayManageTeamsWindow():
         elif menu_option == "3":
             print("Got to listing teams")
             break
+        elif menu_option == "4":
+            main()
+        else:
+            print("You did not enter a valid command")
 
 
 def displayMangePlayersMenu():
@@ -56,6 +61,7 @@ def main():
             break
         else:
             print("You did not enter a valid command.")
+            break
 
 
 if __name__ == "__main__":

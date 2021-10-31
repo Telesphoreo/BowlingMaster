@@ -8,27 +8,40 @@ filename = "players.csv"
 
 class Player:
     def __init__(self):
-        pass
+        self.initializeFile()
+
+    def initializeFile(self):
+        # Create the file if it doesn't exist already as a failsafe
+        if not exists(filename):
+            with open(filename, "x") as file:
+                file.close()
 
     # Create a new player
     def createPlayer(self, name):
-        # [1, Name]]
+        # [1, Name]
         name = [self.generateId(), name]
         with open(filename, "a") as file:
             writer = csv.writer(file)
             writer.writerow(name)
         file.close()
 
+    # why do you need pandas for this
     def deletePlayer(self, id):
-        ihatepython = pd.read_csv(filename)
+        id = int(id) - 1
+        print(str(id))
+        with open(filename, "r") as file:
+            ihatepython = pd.read_csv(file, header=None)
+            print(ihatepython)
+            ihatepython.drop([int(id)], axis="rows", inplace=True)
+            print()
+            print(ihatepython)
+            # this now works, but the problem now is there is a difference between the index and the ids
+            # instead of dropping from the index, we'll have to figure out how to drop
+            # the actual row itself
+            ihatepython.to_csv(filename, header=None, index=False)
 
     # Method for generating an ID for each player
     def generateId(self):
-        # Create the file if it doesn't exist already as a failsafe
-        if not exists(filename):
-            with open(filename, "x") as file:
-                file.close()
-
         with open(filename, "r") as file:
             try:
                 # Read the last line of the file
@@ -83,8 +96,12 @@ class Player:
                     return lines.split(",")[0]
         file.close()
 
+
+'''
 def main():
     Player().deletePlayer("1")
 
+
 if __name__ == '__main__':
     main()
+'''
