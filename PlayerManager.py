@@ -1,7 +1,7 @@
 import csv
+import shutil
 from prettytable import PrettyTable
 from os.path import exists
-import pandas as pd
 
 filename = "players.csv"
 
@@ -18,7 +18,7 @@ class Player:
 
     # Create a new player
     def createPlayer(self, name):
-        # [1, Name]
+        # [1, Name, 0 ]
         name = [self.generateId(), name]
         with open(filename, "a") as file:
             writer = csv.writer(file)
@@ -28,13 +28,15 @@ class Player:
     # now to move it back to its own csv file
     def deletePlayer(self, id):
         input = open(filename, "r")
-        output = open(filename + "_edited", "w")
+        output = open("players_edited.csv", "w")
         writer = csv.writer(output)
         for row in csv.reader(input):
             if row[0] != str(id):
                 writer.writerow(row)
         input.close()
         output.close()
+
+        shutil.move("players_edited.csv", filename)
 
     # Method for generating an ID for each player
     def generateId(self):
@@ -88,6 +90,7 @@ class Player:
                 if name == lines.split(",")[1].strip("\n"):
                     return lines.split(",")[0]
         file.close()
+
 
 
 def main():
