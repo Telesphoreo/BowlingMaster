@@ -90,10 +90,3 @@ class Player:
                 if name == lines.split(",")[1].strip("\n"):
                     return lines.split(",")[0]
         file.close()
-
-
-
-def main():
-    Player().deletePlayer(int(6))
-
-main()
