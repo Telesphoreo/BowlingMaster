@@ -18,7 +18,7 @@ class Player:
 
     # Create a new player
     def createPlayer(self, name):
-        # [1, Name, 0 ]
+        # [1, Name, 0]
         name = [self.generateId(), name]
         with open(filename, "a") as file:
             writer = csv.writer(file)
@@ -26,12 +26,12 @@ class Player:
         file.close()
 
     # now to move it back to its own csv file
-    def deletePlayer(self, id):
+    def deletePlayer(self, playerID):
         input = open(filename, "r")
         output = open("players_edited.csv", "w")
         writer = csv.writer(output)
         for row in csv.reader(input):
-            if row[0] != str(id):
+            if row[0] != str(playerID):
                 writer.writerow(row)
         input.close()
         output.close()
@@ -73,12 +73,12 @@ class Player:
         return table
 
     # Get a player's name from their ID
-    def getName(self, id):
+    def getName(self, playerID):
         with open(filename, "r") as file:
             reader = file.readlines()
             for lines in reader:
                 # List of IDs
-                if lines.split(",")[0] == id:
+                if lines.split(",")[0] == playerID:
                     # Return the name
                     return lines.split(",")[1]
         file.close()
