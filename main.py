@@ -5,6 +5,8 @@ def displayManageTeamsWindow():
     print("1 - Add Team")
     print("2 - Remove Team")
     print("3 - List Teams")
+    print("4 - Add Player to Team")
+    print("4 - Remove Player from Team")
     print("4 - Back to Main Menu")
     while True:
         menu_option = input("Please enter a command: ")

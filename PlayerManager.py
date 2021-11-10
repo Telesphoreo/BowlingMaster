@@ -19,27 +19,32 @@ class Player:
     # Create a new player
     def createPlayer(self, name):
         # [1, Name, 0]
-        name = [self.generateId(), name]
+        name = [self.generateID(), name]
         with open(filename, "a") as file:
             writer = csv.writer(file)
             writer.writerow(name)
         file.close()
 
-    # now to move it back to its own csv file
+    # Delete a player
     def deletePlayer(self, playerID):
         input = open(filename, "r")
+        # Create a temporary new file
         output = open("players_edited.csv", "w")
         writer = csv.writer(output)
+        # Write every line to the file, except the one to be deleted
         for row in csv.reader(input):
             if row[0] != str(playerID):
                 writer.writerow(row)
+
+        # Close both files
         input.close()
         output.close()
 
+        # Move the temporary file to the original
         shutil.move("players_edited.csv", filename)
 
     # Method for generating an ID for each player
-    def generateId(self):
+    def generateID(self):
         with open(filename, "r") as file:
             try:
                 # Read the last line of the file
