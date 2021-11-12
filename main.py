@@ -1,5 +1,8 @@
 from PlayerManager import Player
 
+bruh="bruh"
+print(bruh)
+
 def displayManageTeamsWindow():
     print("1 - Add Team")
     print("2 - Remove Team")
