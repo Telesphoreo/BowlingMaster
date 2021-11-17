@@ -33,8 +33,3 @@ class Teams:
                     list = {self.playerID : [columns[0], columns[1], team_name]}
                     data = list.get(lines, lines)
                     writer.writerow(data)
-
-def main():
-    Teams("1").addPlayer("bruh")
-
-main()

@@ -3,6 +3,7 @@ from Teams import Teams
 from datetime import date
 import DateManager
 
+
 def displayManageTeamsWindow():
     print("1 - Add Team")
     print("2 - Remove Team")
@@ -42,17 +43,22 @@ def displayMangePlayersMenu():
             name = input("Enter your new player's name: ")
             pm.createPlayer(name)
             print("Added new player:", name)
+            break
         elif menu_option == "2":
-            print("Got to removing a player")
+            name = input("Enter the ID of the player you would like to delete: ")
+            pm.deletePlayer(name)
+            print("Deleted player:", name)
             break
         elif menu_option == "3":
-            print(pm.listPlayers())
+            # print(pm.listPlayers())
+            pass
         elif menu_option == "4":
             main()
             break
         else:
             print("You did not enter a valid command (player)")
         break
+
 
 def displayOtherOptions():
     print("1 - Set next tournament")
@@ -76,6 +82,7 @@ def displayOtherOptions():
         else:
             print("You did not enter a valid command (other options)")
         break
+
 
 def main():
     print("Bowling Manager")
