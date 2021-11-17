@@ -2,19 +2,25 @@ import csv
 import shutil
 from prettytable import PrettyTable
 from os.path import exists
+import sqlite3
 
-filename = "players.csv"
-
+connection = sqlite3.connect("players.db")
 
 class Player:
     def __init__(self):
-        self.initializeFile()
+        # self.initializeFile()
+        pass
 
     def initializeFile(self):
-        # Create the file if it doesn't exist already as a failsafe
-        if not exists(filename):
-            with open(filename, "x") as file:
-                file.close()
+        print(connection.total_changes)
+        cursor = connection.cursor()
+        tb_exists = "SELECT name FROM sqlite_master WHERE type='table' AND name='spwords'"
+        if not connection.execute(tb_exists).fetchone():
+            connection.execute(tb_create)
+        cursor.execute("CREATE TABLE players (name TEXT, team TEXT, spg INTEGER, total_score INTEGER)")
+        cursor.execute("INSERT INTO players VALUES ('Sammy', 'dont care', 0, 0)")
+        connection.commit()
+        connection.close()
 
     # Create a new player
     def createPlayer(self, name):
@@ -96,3 +102,10 @@ class Player:
                     return lines.split(",")[0]
         file.close()
 
+
+def main():
+    Player().initializeFile()
+
+
+if __name__ == '__main__':
+    main()
