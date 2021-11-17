@@ -18,9 +18,3 @@ class Teams:
     def createTeam(self, team_name):
         with open(filename, "a") as file:
             file.write(team_name + "\n")
-
-
-def main():
-    Teams("not yet implemented").createTeam("test team")
-
-main()

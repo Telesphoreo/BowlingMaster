@@ -1,4 +1,5 @@
 from PlayerManager import Player
+from Teams import Teams
 from datetime import date
 import DateManager
 
@@ -12,7 +13,8 @@ def displayManageTeamsWindow():
     while True:
         menu_option = input("Please enter a command: ")
         if menu_option == "1":
-            print("Got to adding a team")
+            team_name = input("Please enter a team name: ")
+            Teams("doesn't matter lol").createTeam(team_name)
             break
         elif menu_option == "2":
             print("Got to removing a team")
