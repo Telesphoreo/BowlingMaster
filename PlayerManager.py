@@ -95,3 +95,4 @@ class Player:
                 if name == lines.split(",")[1].strip("\n"):
                     return lines.split(",")[0]
         file.close()
+
