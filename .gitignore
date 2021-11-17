@@ -6,6 +6,7 @@ __pycache__/
 .idea/
 players.csv
 options.txt
+teams.txt
 
 # C extensions
 *.so
