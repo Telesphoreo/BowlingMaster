@@ -4,9 +4,8 @@ __pycache__/
 *$py.class
 
 .idea/
-players.csv
+players.db
 options.txt
-teams.txt
 
 # C extensions
 *.so
