@@ -75,3 +75,12 @@ class Teams:
     def removePlayerFromTeam(self, playerID):
         cursor.execute("UPDATE players SET team = NULL WHERE id = ?", (playerID,))
         connection.commit()
+
+class Points:
+    def __init__(self, pnts, strikes):
+        self.pnts = pnts
+        self.strikes = strikes
+
+    def getScores(self):
+        pnts = int(input("Enter your total score."))
+        strikes = int(input("Enter your number of total strikes."))
