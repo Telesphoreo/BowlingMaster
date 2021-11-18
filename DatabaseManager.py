@@ -37,14 +37,23 @@ class Player:
     # List every player
     def listPlayers(self):
         cursor.execute("SELECT id, name, team FROM players")
-        list = from_db_cursor(cursor)
-        return list
+        table = from_db_cursor(cursor)
+        table.field_names = ["ID", "Name", "Team"]
+        return table
 
     # List the scores for every player
     def listScores(self):
         cursor.execute("SELECT id, name, strikes_per_game, total_score FROM players")
-        list = from_db_cursor(cursor)
-        return list
+        table = from_db_cursor(cursor)
+        table.field_names = ["ID", "Name", "Strikes Per Game", "Total Score"]
+        return table
+
+    # List everything
+    def listEverything(self):
+        cursor.execute("SELECT id, name, team, strikes_per_game, total_score FROM players")
+        table = from_db_cursor(cursor)
+        table.field_names = ["ID", "Name", "Team", "Strikes Per Game", "Total Score"]
+        return table
 
     # TODO: Add a check to see if a player doesn't exist
     def getName(self, playerID):

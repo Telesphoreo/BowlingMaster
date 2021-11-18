@@ -1,8 +1,8 @@
 from DatabaseManager import Player
 from DatabaseManager import Teams
 from DatabaseManager import Points
-from datetime import date
 import DateManager
+from datetime import date
 
 
 def displayManageTeamsWindow():
@@ -138,7 +138,8 @@ def main():
     print("2 - Manage Players")
     print("3 - Manage Scores")
     print("4 - Other options")
-    print("5 - Exit")
+    print("5 - Show All Players")
+    print("6 - Exit")
     menu_option = input("Please enter a command: ")
     while True:
         if menu_option == "1":
@@ -154,8 +155,12 @@ def main():
             displayOtherOptionsMenu()
             break
         elif menu_option == "5":
+            print(Player().listEverything())
+            break
+        elif menu_option == "6":
             print("Exiting program...")
             break
+        # This is an infinite loop
         else:
             print("You did not enter a valid command.")
 
