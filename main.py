@@ -1,4 +1,4 @@
-from PlayerManager import Player
+from DatabaseManager import Player
 from Teams import Teams
 from datetime import date
 import DateManager
@@ -45,12 +45,13 @@ def displayMangePlayersMenu():
             print("Added new player:", name)
             break
         elif menu_option == "2":
-            name = input("Enter the ID of the player you would like to delete: ")
-            pm.deletePlayer(name)
+            id = input("Enter the ID of the player you would like to delete: ")
+            name = pm.getName(id)
+            pm.deletePlayer(id)
             print("Deleted player:", name)
             break
         elif menu_option == "3":
-            # print(pm.listPlayers())
+            print(pm.listPlayers())
             pass
         elif menu_option == "4":
             main()

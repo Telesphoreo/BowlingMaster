@@ -1,7 +1,4 @@
-import csv
-import shutil
 from prettytable import from_db_cursor
-from os.path import exists
 import sqlite3
 
 connection = sqlite3.connect("players.db")
@@ -31,28 +28,16 @@ class Player:
         cursor.execute("DELETE FROM players WHERE id = ?", (playerID,))
         connection.commit()
 
-'''
+
     # List every player
     def listPlayers(self):
+        cursor.execute("SELECT id, name, team FROM players")
+        list = from_db_cursor(cursor)
+        return list
 
-
-
-    # Get a player's name from their ID
     def getName(self, playerID):
-        with open(filename, "r") as file:
-            reader = file.readlines()
-            for lines in reader:
-                # List of IDs
-                if lines.split(",")[0] == playerID:
-                    # Return the name
-                    return lines.split(",")[1]
-        file.close()
-
-    def getID(self, name):
-        with open(filename, "r") as file:
-            reader = file.readlines()
-            for lines in reader:
-                if name == lines.split(",")[1].strip("\n"):
-                    return lines.split(",")[0]
-        file.close()
-'''
+        rows = cursor.execute(
+            "SELECT name FROM players WHERE id = ?",
+            (playerID,),
+        ).fetchall()
+        return rows
