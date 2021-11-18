@@ -86,9 +86,9 @@ def displayManageScoresMenu():
     while True:
         menu_option = input("Please enter a command: ")
         if menu_option == "1":
-            playerID = input("Pleae enter the player's ID: ")
-            points = input("Pleae enter the total score from the game: ")
-            strikes = input("Pleae enter the total amount of strikes from the game: ")
+            playerID = input("Please enter the player's ID: ")
+            points = input("Please enter the total score from the game: ")
+            strikes = input("Please enter the total amount of strikes from the game: ")
             Points(playerID, int(points), int(strikes)).setScore()
         elif menu_option == "2":
             playerID = input("Please enter the player's ID: ")
