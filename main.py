@@ -120,6 +120,7 @@ def displayOtherOptionsMenu():
             else:
                 # i know this is bad, someone else fix it
                 displayOtherOptionsMenu()
+                break
         elif menu_option == "2":
             main()
             break
@@ -132,7 +133,7 @@ def main():
     print("Bowling Manager")
     print()
     print("Today is:", date.today())
-    print("Next game:", DateManager.readDate())
+    DateManager.readDate()
     print()
     print("1 - Manage Teams")
     print("2 - Manage Players")
