@@ -1,5 +1,5 @@
 from DatabaseManager import Player
-from Teams import Teams
+from DatabaseManager import Teams
 from datetime import date
 import DateManager
 
@@ -10,21 +10,31 @@ def displayManageTeamsWindow():
     print("3 - List Teams")
     print("4 - Add Player to Team")
     print("5 - Remove Player from Team")
-    print("6 - Back to Main Menu")
+    print("6 - Back")
     while True:
         menu_option = input("Please enter a command: ")
         if menu_option == "1":
             team_name = input("Please enter a team name: ")
-            Teams("doesn't matter lol").createTeam(team_name)
+            Teams().createTeam(team_name)
             break
         elif menu_option == "2":
-            print("Got to removing a team")
+            team_name = input("Please enter the team name you would like to delete: ")
+            Teams().deleteTeam(team_name)
             break
         elif menu_option == "3":
-            print("Got to listing teams")
-            break
+            print(Teams().listTeams())
         elif menu_option == "4":
+            id = input("Enter the ID of the player you would like to modify: ")
+            team_name = input("Enter the name of the team you would like to assign to the player: ")
+            Teams().addPlayerToTeam(id, team_name)
+            print("Added", Player().getName(id), "to team", team_name)
+        elif menu_option == "5":
+            id = input("Enter the ID of the player you would like to remove from a team: ")
+            Teams().removePlayerFromTeam(id)
+            print("Removed", Player().getName(id), "from their team.")
+        elif menu_option == "6":
             main()
+            break
         else:
             print("You did not enter a valid command (teams)")
 
@@ -33,8 +43,7 @@ def displayMangePlayersMenu():
     print("1 - Add Player")
     print("2 - Remove Player")
     print("3 - List Players")
-    print("4 - Back to Main Menu")
-    print("5 - Exit")
+    print("4 - Back")
 
     while True:
         menu_option = input("Please enter a command: ")
