@@ -3,13 +3,17 @@ from prettytable import from_db_cursor
 import sqlite3
 
 # Establish a connection to the database
-connection = sqlite3.connect("players.db")
+connection = sqlite3.connect("bowling.db")
 cursor = connection.cursor()
 
 
 # Remove all non-alphanumeric characters
 def stripTuple(string):
     return re.sub("[^A-Za-z0-9 ]", "", str(string))
+
+
+def close():
+    connection.close()
 
 
 class Player:

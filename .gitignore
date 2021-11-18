@@ -4,7 +4,7 @@ __pycache__/
 *$py.class
 
 .idea/
-players.db
+bowling.db
 options.txt
 
 # C extensions

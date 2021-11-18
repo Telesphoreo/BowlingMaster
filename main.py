@@ -1,3 +1,4 @@
+import DatabaseManager
 from DatabaseManager import Player
 from DatabaseManager import Teams
 from DatabaseManager import Points
@@ -160,6 +161,7 @@ def main():
             break
         elif menu_option == "6":
             print("Exiting program...")
+            DatabaseManager.close()
             break
         # This is an infinite loop
         else:
