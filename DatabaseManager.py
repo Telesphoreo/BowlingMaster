@@ -9,7 +9,7 @@ cursor = connection.cursor()
 
 # Remove all non-alphanumeric characters
 def stripTuple(string):
-    return re.sub("[^A-Za-z0-9]", "", str(string))
+    return re.sub("[^A-Za-z0-9 ]", "", str(string))
 
 
 class Player:
@@ -68,9 +68,8 @@ class Teams:
     # Initialize the teams table
     def initializeDatabase(self):
         tb_exists = "SELECT name FROM sqlite_master WHERE type='table' AND name='teams'"
-        if not cursor.execute(tb_exists):
-            cursor.execute(
-                "CREATE TABLE teams (name TEXT)")
+        if not cursor.execute(tb_exists).fetchone():
+            cursor.execute("CREATE TABLE teams (name TEXT)")
         connection.commit()
 
     # Create a new team
@@ -86,8 +85,9 @@ class Teams:
     # List every team name
     def listTeams(self):
         cursor.execute("SELECT name FROM teams")
-        list = from_db_cursor(cursor)
-        return list
+        table = from_db_cursor(cursor)
+        table.field_names = ["Name"]
+        return table
 
     def addPlayerToTeam(self, playerID, team):
         cursor.execute("UPDATE players SET team = ? WHERE id = ?", (team, playerID,))
