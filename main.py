@@ -1,5 +1,6 @@
 from DatabaseManager import Player
 from DatabaseManager import Teams
+from DatabaseManager import Points
 from datetime import date
 import DateManager
 
@@ -23,20 +24,23 @@ def displayManageTeamsWindow():
             break
         elif menu_option == "3":
             print(Teams().listTeams())
+            break
         elif menu_option == "4":
-            id = input("Enter the ID of the player you would like to modify: ")
+            playerID = input("Enter the ID of the player you would like to modify: ")
             team_name = input("Enter the name of the team you would like to assign to the player: ")
-            Teams().addPlayerToTeam(id, team_name)
-            print("Added", Player().getName(id), "to team", team_name)
+            Teams().addPlayerToTeam(playerID, team_name)
+            print("Added", Player().getName(playerID), "to team", team_name)
+            break
         elif menu_option == "5":
-            id = input("Enter the ID of the player you would like to remove from a team: ")
-            Teams().removePlayerFromTeam(id)
-            print("Removed", Player().getName(id), "from their team.")
+            playerID = input("Enter the ID of the player you would like to remove from a team: ")
+            Teams().removePlayerFromTeam(playerID)
+            print("Removed", Player().getName(playerID), "from their team.")
+            break
         elif menu_option == "6":
             main()
             break
         else:
-            print("You did not enter a valid command (teams)")
+            print("You did not enter a valid command.")
 
 
 def displayMangePlayersMenu():
@@ -47,21 +51,24 @@ def displayMangePlayersMenu():
 
     while True:
         menu_option = input("Please enter a command: ")
-        pm = Player()
         if menu_option == "1":
             name = input("Enter your new player's name: ")
-            pm.createPlayer(name)
+            Player().createPlayer(name)
             print("Added new player:", name)
+            print("Returning to main menu...")
+            main()
             break
         elif menu_option == "2":
-            id = input("Enter the ID of the player you would like to delete: ")
-            name = pm.getName(id)
-            pm.deletePlayer(id)
+            playerID = input("Enter the ID of the player you would like to delete: ")
+            name = Player().getName(playerID)
+            Player().deletePlayer(playerID)
             print("Deleted player:", name)
+            print("Returning to main menu...")
+            main()
             break
         elif menu_option == "3":
-            print(pm.listPlayers())
-            pass
+            print(Player().listPlayers())
+            break
         elif menu_option == "4":
             main()
             break
@@ -70,7 +77,34 @@ def displayMangePlayersMenu():
         break
 
 
-def displayOtherOptions():
+def displayManageScoresMenu():
+    print("1 - Update score for player")
+    print("2 - Reset score for player")
+    print("3 - List all scores")
+    print("4 - Back")
+    while True:
+        menu_option = input("Please enter a command: ")
+        if menu_option == "1":
+            playerID = input("Pleae enter the player's ID: ")
+            points = input("Pleae enter the total score from the game: ")
+            strikes = input("Pleae enter the total amount of strikes from the game: ")
+            Points(playerID, int(points), int(strikes)).setScore()
+        elif menu_option == "2":
+            playerID = input("Please enter the player's ID: ")
+            Points(playerID, 0, 0).setScore()
+            print("The score for player", Player().getName(playerID), "has been reset!")
+            break
+        elif menu_option == "3":
+            print(Player().listScores())
+        elif menu_option == "4":
+            main()
+            break
+        else:
+            print("You did not enter a valid command (other options)")
+        break
+
+
+def displayOtherOptionsMenu():
     print("1 - Set next tournament")
     print("2 - Back")
 
@@ -85,7 +119,7 @@ def displayOtherOptions():
                 break
             else:
                 # i know this is bad, someone else fix it
-                displayOtherOptions()
+                displayOtherOptionsMenu()
         elif menu_option == "2":
             main()
             break
@@ -102,8 +136,9 @@ def main():
     print()
     print("1 - Manage Teams")
     print("2 - Manage Players")
-    print("3 - Other options")
-    print("4 - Exit")
+    print("3 - Manage Scores")
+    print("4 - Other options")
+    print("5 - Exit")
     menu_option = input("Please enter a command: ")
     while True:
         if menu_option == "1":
@@ -113,10 +148,13 @@ def main():
             displayMangePlayersMenu()
             break
         elif menu_option == "3":
-            displayOtherOptions()
+            displayManageScoresMenu()
             break
         elif menu_option == "4":
-            print("Exiting program")
+            displayOtherOptionsMenu()
+            break
+        elif menu_option == "5":
+            print("Exiting program...")
             break
         else:
             print("You did not enter a valid command.")

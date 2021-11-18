@@ -2,12 +2,14 @@ import re
 from prettytable import from_db_cursor
 import sqlite3
 
+# Establish a connection to the database
 connection = sqlite3.connect("players.db")
 cursor = connection.cursor()
 
 
+# Remove all non-alphanumeric characters
 def stripTuple(string):
-    return re.sub("[^0-9]", "", str(string))
+    return re.sub("[^A-Za-z0-9]", "", str(string))
 
 
 class Player:
@@ -24,7 +26,7 @@ class Player:
 
     # Create a new player
     def createPlayer(self, name):
-        cursor.execute("INSERT INTO players VALUES (NULL, ?, NULL, NULL, NULL)", (name,))
+        cursor.execute("INSERT INTO players VALUES (NULL, ?, NULL, 0, 0)", (name,))
         connection.commit()
 
     # Delete a player
@@ -38,14 +40,16 @@ class Player:
         list = from_db_cursor(cursor)
         return list
 
+    # List the scores for every player
+    def listScores(self):
+        cursor.execute("SELECT id, name, strikes_per_game, total_score FROM players")
+        list = from_db_cursor(cursor)
+        return list
+
+    # TODO: Add a check to see if a player doesn't exist
     def getName(self, playerID):
-        try:
-            result = cursor.execute(
-                "SELECT name FROM players WHERE id = ?",
-                (playerID,)).fetchall()
-            return stripTuple(result)
-        except IndexError:
-            print("No player with that ID could be found.")
+        result = cursor.execute("SELECT name FROM players WHERE id = ?", (playerID,)).fetchall()
+        return stripTuple(result)
 
 
 class Teams:
@@ -92,6 +96,11 @@ class Points:
         self.strikes = strikes
 
     def setScore(self):
+        if self.points > 300:
+            print("The total score cannot be over 300!")
+        if self.strikes > 300:
+            print("The total strikes cannot be over 12!")
+
         # Fetch strikes and total score
         db_strikes = cursor.execute(
             "SELECT strikes_per_game FROM players WHERE id = ?",
@@ -103,30 +112,21 @@ class Points:
         # Strip tuple from operation
         strip_strikes = stripTuple(db_strikes)
         strip_total = stripTuple(db_total)
-        print(strip_strikes)
 
-        # Probably need additional checks here
-        if strip_strikes == "":
-            strip_strikes = 0
-        if int(self.strikes) > 12:
-            raise ValueError("The amount of strikes cannot be more than 12!")
-        if strip_total == "":
-            strip_total = 0
-        if int(self.points) > 300:
-            raise ValueError("The score cannot be more than 300!")
+        try:
+            # This shouldn't happen
+            if strip_strikes == "":
+                strip_strikes = 0
+            # This shouldn't happen
+            if strip_total == "":
+                strip_total = 0
 
-        # Add more to current strikes and total score
-        new_strikes = int(strip_strikes) + int(self.strikes)
-        new_total = int(strip_total) + int(self.points)
-
-        # Execute operation
-        cursor.execute("UPDATE players SET strikes_per_game = ?, total_score = ? WHERE id = ?",
-                       (new_strikes, new_total, self.playerID))
-        connection.commit()
-
-
-def main():
-    Points(1, 300, 12).setScore()
-
-
-main()
+            # Add more to current strikes and total score
+            new_strikes = int(strip_strikes) + int(self.strikes)
+            new_total = int(strip_total) + int(self.points)
+            # Execute operation
+            cursor.execute("UPDATE players SET strikes_per_game = ?, total_score = ? WHERE id = ?",
+                           (new_strikes, new_total, self.playerID))
+            connection.commit()
+        except ValueError:
+            print("You must enter an integer for all fields!")
