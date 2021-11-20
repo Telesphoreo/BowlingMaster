@@ -6,6 +6,7 @@ __pycache__/
 .idea/
 bowling.db
 options.txt
+.vscode
 
 # C extensions
 *.so
