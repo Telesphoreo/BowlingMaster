@@ -89,7 +89,11 @@ def displayManageScoresMenu():
             playerID = input("Please enter the player's ID: ")
             points = input("Please enter the total score from the game: ")
             strikes = input("Please enter the total amount of strikes from the game: ")
-            Points(playerID, int(points), int(strikes)).setScore()
+            try:
+                Points(playerID, int(points), int(strikes)).setScore()
+            except ValueError:
+                print("You must enter a valid number for all fields!")
+                break
         elif menu_option == "2":
             playerID = input("Please enter the player's ID: ")
             Points(playerID, 0, 0).setScore()
@@ -163,9 +167,10 @@ def main():
             print("Exiting program...")
             DatabaseManager.close()
             break
-        # This is an infinite loop
         else:
             print("You did not enter a valid command.")
+            main()
+            break
 
 
 if __name__ == "__main__":

@@ -1,5 +1,5 @@
 from datetime import date, datetime
-import os
+from os.path import getsize
 
 
 def setDate(fileDate):
@@ -14,14 +14,14 @@ def setDate(fileDate):
     with open("options.txt", mode='w') as file:
         file.write(str(fileDate.date()))
         file.close()
-
     return True
 
 
 def readDate():
     try:
-        if os.path.getsize("options.txt") == 0:
+        if getsize("options.txt") == 0:
             print("Next game: Not set")
+            return
 
         with open("options.txt", "r") as file:
             for lines in file.readlines():
@@ -40,4 +40,3 @@ def readDate():
         file.close()
     except FileNotFoundError:
         print("Next game: Not set")
-

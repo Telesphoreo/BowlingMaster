@@ -12,6 +12,7 @@ def stripTuple(string):
     return re.sub("[^A-Za-z0-9 ]", "", str(string))
 
 
+# Safely close connection to database
 def close():
     connection.close()
 
@@ -21,8 +22,8 @@ class Player:
         self.initializeDatabase()
 
     def initializeDatabase(self):
-        tb_exists = "SELECT name FROM sqlite_master WHERE type='table' AND name='players'"
-        if not cursor.execute(tb_exists).fetchone():
+        table_exists = "SELECT name FROM sqlite_master WHERE type='table' AND name='players'"
+        if not cursor.execute(table_exists).fetchone():
             cursor.execute(
                 "CREATE TABLE players (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, team TEXT, strikes_per_game "
                 "INTEGER, total_score INTEGER)")
@@ -71,8 +72,8 @@ class Teams:
 
     # Initialize the teams table
     def initializeDatabase(self):
-        tb_exists = "SELECT name FROM sqlite_master WHERE type='table' AND name='teams'"
-        if not cursor.execute(tb_exists).fetchone():
+        table_exists = "SELECT name FROM sqlite_master WHERE type='table' AND name='teams'"
+        if not cursor.execute(table_exists).fetchone():
             cursor.execute("CREATE TABLE teams (name TEXT)")
         connection.commit()
 
@@ -109,8 +110,13 @@ class Points:
         self.strikes = strikes
 
     def setScore(self):
+        # Validate the scores
+        if self.points < 0:
+            print("The total score cannot be less than zero!")
         if self.points > 300:
             print("The total score cannot be over 300!")
+        if self.strikes < 0:
+            print("The total strikes cannot be less than 0!")
         if self.strikes > 300:
             print("The total strikes cannot be over 12!")
 
@@ -127,10 +133,9 @@ class Points:
         strip_total = stripTuple(db_total)
 
         try:
-            # This shouldn't happen
+            # This shouldn't happen, but set it to zero if the scores are NULL
             if strip_strikes == "":
                 strip_strikes = 0
-            # This shouldn't happen
             if strip_total == "":
                 strip_total = 0
 
