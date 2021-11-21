@@ -4,14 +4,18 @@ from tkinter import ttk, Entry, StringVar
 class MyFrame(ttk.Frame):
     def __init__(self, parent):
         ttk.Frame.__init__(self, parent, padding="10 10 10 10")
+        self.parent = parent
+        self.parent.configure(background='black')
+
         self.pack()
-        ttk.Button(self, text="Manage Teams").grid(column=0, row=0, sticky=tk.E)
-        ttk.Button(self, text="Manage Players").grid(column=0, row=1, sticky=tk.E)
-        ttk.Button(self, text="Manage Scores").grid(column=0, row=2, sticky=tk.E)
-        ttk.Button(self, text="Other Options").grid(column=0, row=3, sticky=tk.E)
-        ttk.Button(self, text="Show All Players").grid(column=0, row=4, sticky=tk.E)
-        ttk.Button(self, text="About").grid(column=0, row=5, sticky=tk.E)
-        ttk.Button(self, text="Exit").grid(column=0, row=6, sticky=tk.E)
+        tk.Button(self, height=3, text="Manage Teams", width=225, bg="purple", fg="white").grid(column=0, row=0, sticky=tk.E)
+        tk.Button(self, height=3, text="Manage Players", width=225, bg="purple", fg="white").grid(column=0, row=1, sticky=tk.E)
+        tk.Button(self, height=3, text="Manage Scores", width=225, bg="purple", fg="white").grid(column=0, row=2, sticky=tk.E)
+        tk.Button(self, height=3, text="Other Options", width=225, bg="purple", fg="white").grid(column=0, row=3, sticky=tk.E)
+        tk.Button(self, height=3, text="Show All Players", width=225, bg="purple", fg="white").grid(column=0, row=4, sticky=tk.E)
+        tk.Button(self, height=3, text="About", width=225, bg="purple", fg="white").grid(column=0, row=5, sticky=tk.E)
+        tk.Button(self, height=3, text="Exit", width=225, bg="purple", fg="white").grid(column=0, row=6, sticky=tk.E)
+
 
         for child in self.winfo_children():
             child.grid_configure(padx=5, pady=3)
