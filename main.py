@@ -5,7 +5,7 @@ from DatabaseManager import Points
 import DateManager
 from datetime import date
 import tkinter as tk
-from tkinter import ttk, Entry, StringVar, messagebox
+from tkinter import ttk, Entry, StringVar, messagebox, NSEW
 
 def displayManageTeamsWindow():
     print("1 - Add Team")
@@ -179,15 +179,18 @@ def main():
 class MyFrame(ttk.Frame):
     def __init__(self, parent):
         ttk.Frame.__init__(self, parent, padding="10 10 10 10")
+        MyFrame.grid(self, in_=root, row=1, column=0, columnspan=3, sticky=NSEW)
+        root.columnconfigure(0, weight=1)
+        root.rowconfigure(1, weight=1)
         self.pack()
 
-        tk.Button(self, command = self.TeamsButtons, text="Manage Teams", height=3, width=225, bg="purple", fg="white").grid(column=0, row=0, sticky=tk.E)
-        tk.Button(self, command = self.PlayerButtons, text="Manage Players", height=3, width=225, bg="purple", fg="white").grid(column=0, row=1, sticky=tk.E)
-        tk.Button(self, command = self.ScoreButtons, text="Manage Scores", height=3, width=225, bg="purple", fg="white").grid(column=0, row=2, sticky=tk.E)
-        tk.Button(self, text="Other Options", height=3, width=225, bg="purple", fg="white").grid(column=0, row=3, sticky=tk.E)
-        tk.Button(self, text="Show All Players", height=3, width=225, bg="purple", fg="white").grid(column=0, row=4, sticky=tk.E)
-        tk.Button(self, text="About", height=3, width=225, bg="purple", fg="white").grid(column=0, row=5, sticky=tk.E)
-        tk.Button(self, text="Exit", height=3, width=225, bg="purple", fg="white").grid(column=0, row=6, sticky=tk.E)
+        tk.Button(self, command = self.TeamsButtons, text="Manage Teams", bg="purple", fg="white").grid(column=0, row=0)
+        tk.Button(self, command = self.PlayerButtons, text="Manage Players", bg="purple", fg="white").grid(column=0, row=1)
+        tk.Button(self, command = self.ScoreButtons, text="Manage Scores", bg="purple", fg="white").grid(column=0, row=2)
+        tk.Button(self, text="Other Options", bg="purple", fg="white").grid(column=0, row=3)
+        tk.Button(self, text="Show All Players", bg="purple", fg="white").grid(column=0, row=4)
+        tk.Button(self, text="About", bg="purple", fg="white").grid(column=0, row=5)
+        tk.Button(self, text="Exit", bg="purple", fg="white").grid(column=0, row=6)
 
         for child in self.winfo_children():
             child.grid_configure(padx=5, pady=3)
@@ -201,7 +204,7 @@ class MyFrame(ttk.Frame):
     def TeamsButtons(self):
         ttk.Frame.__init__(self, padding="10 10 10 10")
         self.pack()
-        ttk.Button(self, text="Add Team").grid(column=1, row=0)#, command=lambda: Teams().createTeam(team_name))
+        ttk.Button(self, text="Add Team").grid(column=1, row=0, sticky=tk.W)#, command=lambda: Teams().createTeam(team_name))
         ttk.Button(self, text="Remove Team").grid(column=1, row=1)#, command=lambda: Teams().deleteTeam(team_name))
         ttk.Button(self, text="List Teams").grid(column=1, row=2)#, command=lambda: print(Teams().listTeams()))
         ttk.Button(self, text="Add Player to Team").grid(column=1, row=3)#, command=lambda: Teams().addPlayerToTeam(playerID, team_name))
