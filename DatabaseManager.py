@@ -60,7 +60,7 @@ class Player:
         table.field_names = ["ID", "Name", "Team", "Strikes Per Game", "Total Score"]
         return table
 
-    # TODO: Add a check to see if a player doesn't exist
+    # Get a players name from their ID
     def getName(self, playerID):
         result = cursor.execute("SELECT name FROM players WHERE id = ?", (playerID,)).fetchall()
         return stripTuple(result)
