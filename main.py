@@ -5,9 +5,11 @@ from DatabaseManager import Points
 import DateManager
 from datetime import date
 
+
 def returnToMainMenu():
     print("Returning to main menu...")
     main()
+
 
 def displayManageTeamsWindow():
     print("1 - Add Team")
@@ -100,7 +102,7 @@ def displayManageScoresMenu():
             points = input("Please enter the total score from the game: ")
             strikes = input("Please enter the total amount of strikes from the game: ")
             try:
-                Points(playerID, int(points), int(strikes)).setScore()
+                Points(playerID, int(points), int(strikes)).addScore()
                 returnToMainMenu()
                 break
             except ValueError:

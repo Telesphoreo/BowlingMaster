@@ -110,14 +110,19 @@ class Points:
         self.strikes = strikes
 
     def setScore(self):
+        cursor.execute("UPDATE players SET strikes_per_game = ?, total_score = ? WHERE id = ?",
+                       (self.strikes, self.points, self.playerID))
+        connection.commit()
+
+    def addScore(self):
         # Validate the scores
         if self.points < 0:
             print("The total score cannot be less than zero!")
         if self.points > 300:
             print("The total score cannot be over 300!")
         if self.strikes < 0:
-            print("The total strikes cannot be less than 0!")
-        if self.strikes > 300:
+            print("The total strikes cannot be less than zero!")
+        if self.strikes > 12:
             print("The total strikes cannot be over 12!")
 
         # Fetch strikes and total score
