@@ -30,6 +30,7 @@ def displayManageTeamsWindow():
             break
         elif menu_option == "3":
             print(Teams().listTeams())
+            displayManageTeamsWindow()
             break
         elif menu_option == "4":
             playerID = input("Enter the ID of the player you would like to modify: ")
@@ -76,6 +77,7 @@ def displayMangePlayersMenu():
             break
         elif menu_option == "3":
             print(Player().listPlayers())
+            displayMangePlayersMenu()
             break
         elif menu_option == "4":
             main()
@@ -112,6 +114,7 @@ def displayManageScoresMenu():
             break
         elif menu_option == "3":
             print(Player().listScores())
+            displayManageScoresMenu()
             break
         elif menu_option == "4":
             main()
@@ -175,6 +178,7 @@ def main():
             break
         elif menu_option == "5":
             print(Player().listEverything())
+            main()
             break
         elif menu_option == "6":
             print("Exiting program...")
